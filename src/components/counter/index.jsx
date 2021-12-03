@@ -1,26 +1,23 @@
 import React from "react";
 import { Container } from "./style.js";
 import { useDispatch, useSelector } from "react-redux";
-import { addNumber, removeNumber } from "../../store/modules/counter/actions";
-import { useState } from "react";
+import {
+  addNumberThunk,
+  removeNumberThunk,
+} from "../../store/modules/counter/thunks.js";
 const Counter = () => {
-  const [value, setValue] = useState(0);
   const dispatch = useDispatch();
-  const numberValue = useSelector((state) => state.number);
-  const clickAdd = () => {
-    setValue(value + 1);
-    dispatch(addNumber(value));
-  };
-  const clickRemove = () => {
-    setValue(value - 1);
-    dispatch(removeNumber(value));
-  };
+  const { number } = useSelector((state) => state.number);
+  console.log(number);
+
+  const add = () => dispatch(addNumberThunk(number));
+  const rm = () => dispatch(removeNumberThunk(number));
 
   return (
     <Container>
-      <button onClick={clickAdd}>+</button>
-      <p>{numberValue.number}</p>
-      <button onClick={clickRemove}>-</button>
+      <button onClick={add}>+</button>
+      <p>{number}</p>
+      <button onClick={rm}>-</button>
     </Container>
   );
 };

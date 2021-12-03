@@ -8,7 +8,6 @@ import {
 const Counter = () => {
   const dispatch = useDispatch();
   const { number } = useSelector((state) => state.number);
-  console.log(number);
 
   const add = () => dispatch(addNumberThunk(number));
   const rm = () => dispatch(removeNumberThunk(number));
